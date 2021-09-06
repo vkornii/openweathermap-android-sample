@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WeatherApp</string>
+    <string name="city_name">City name</string>
+    <string name="lookup">Lookup</string>
+    <string name="unknown_city">Unknown city: %s</string>
+    <string name="feels_like">Feels like: %.1f</string>
+</resources>
