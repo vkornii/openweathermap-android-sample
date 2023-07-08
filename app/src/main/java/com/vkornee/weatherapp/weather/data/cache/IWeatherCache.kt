@@ -4,9 +4,8 @@ import com.vkornee.weatherapp.weather.domain.model.WeatherData
 import kotlinx.coroutines.flow.Flow
 
 interface IWeatherCache {
-    suspend fun saveWeatherData(city: String, data: List<WeatherData>)
+    suspend fun saveWeatherData(data: WeatherData)
 
-    fun flowWeatherData(city: String): Flow<List<WeatherData>>
+    fun flowWeatherDetails(city: String): Flow<WeatherData>
 
-    fun flowWeatherDetails(city: String, weatherId: Int): Flow<WeatherData>
 }

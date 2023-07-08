@@ -11,7 +11,6 @@ import com.vkornee.weatherapp.weather.domain.model.CacheType
 import com.vkornee.weatherapp.weather.domain.model.DataSource
 import com.vkornee.weatherapp.weather.domain.model.SourceType
 import com.vkornee.weatherapp.weather.domain.repository.IWeatherRepository
-import com.vkornee.weatherapp.weather.domain.repository.Repository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -26,7 +25,6 @@ interface WeatherModule {
 
     @Binds
     @Singleton
-    @Repository
     fun provideRepository(repository: WeatherRepository): IWeatherRepository
 
     @Binds

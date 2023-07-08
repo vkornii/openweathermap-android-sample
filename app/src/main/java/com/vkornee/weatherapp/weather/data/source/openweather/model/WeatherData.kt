@@ -1,16 +1,16 @@
 package com.vkornee.weatherapp.weather.data.source.openweather.model
 
 /* Generated with JSON to Kotlin */
-data class OpenWeatherMapResponse(
-    val city: City,
+data class OpenWeatherMapForecast(
+    val city: CityDto,
     val cnt: Int,
     val cod: String,
-    val list: List<WeatherInfo>,
+    val list: List<OpenWeatherMapWeather>,
     val message: Int
 )
 
-data class City(
-    val coord: Coord,
+data class CityDto(
+    val coord: CoordDto,
     val country: String,
     val id: Int,
     val name: String,
@@ -20,57 +20,59 @@ data class City(
     val timezone: Int
 )
 
-data class WeatherInfo(
-    val clouds: Clouds,
-    val dt: Int,
-    val dt_txt: String,
-    val main: Main,
-    val pop: Double,
-    val rain: Rain,
-    val sys: Sys,
-    val visibility: Int,
-    val weather: List<Weather>,
-    val wind: Wind
-)
-
-data class Coord(
+data class CoordDto(
     val lat: Double,
     val lon: Double
 )
 
-data class Clouds(
+data class CloudsDto(
     val all: Int
 )
 
-data class Main(
+data class MainDto(
     val feels_like: Double,
     val grnd_level: Int,
     val humidity: Int,
     val pressure: Int,
     val sea_level: Int,
     val temp: Double,
-    val temp_kf: Double,
     val temp_max: Double,
     val temp_min: Double
 )
 
-data class Rain(
+data class RainDto(
     val `3h`: Double
 )
 
-data class Sys(
+data class SysDto(
     val pod: String
 )
 
-data class Weather(
+data class WeatherDto(
     val description: String,
     val icon: String,
     val id: Int,
     val main: String
 )
 
-data class Wind(
+data class WindDto(
     val deg: Int,
     val gust: Double,
     val speed: Double
+)
+
+data class OpenWeatherMapWeather(
+    val base: String,
+    val clouds: CloudsDto,
+    val cod: Int,
+    val coord: CoordDto,
+    val dt: Int,
+    val id: Int,
+    val main: MainDto,
+    val name: String,
+    val sys: SysDto,
+    val timezone: Int,
+    val visibility: Int,
+    val weather: List<WeatherDto>,
+    val wind: WindDto
 )

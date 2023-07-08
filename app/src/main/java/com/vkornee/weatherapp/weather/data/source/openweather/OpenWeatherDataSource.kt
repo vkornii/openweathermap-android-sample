@@ -20,7 +20,7 @@ class OpenWeatherDataSource @Inject constructor(
     private val openWeatherDataMapper: OpenWeatherDataMapper
 ): WeatherDataSource {
 
-    override suspend fun getWeatherData(city: String): List<WeatherData> =
+    override suspend fun getWeatherData(city: String): WeatherData =
         try {
             openWeatherApi.getWeather(city, apiKey, units)
                 .let(openWeatherDataMapper::map)
@@ -34,5 +34,9 @@ class OpenWeatherDataSource @Inject constructor(
             }
             throw e
         }
+
+    override suspend fun getForecastData(city: String): WeatherData {
+        TODO("Not yet implemented")
+    }
 
 }

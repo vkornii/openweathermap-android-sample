@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 interface WeatherDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun save(entities: List<WeatherEntity>)
+    suspend fun save(entity: WeatherEntity)
 
     @Query("""
         DELETE 
@@ -17,19 +17,12 @@ interface WeatherDao {
         """)
     suspend fun removeEntitiesByCity(city: String)
 
-    @Transaction
-    suspend fun save(city: String, entities: List<WeatherEntity>) {
-        removeEntitiesByCity(city)
-        save(entities)
-    }
-
-
     @Query("""
         SELECT * 
         FROM ${WeatherEntity.TABLE_NAME}
         WHERE ${WeatherEntity.CITY_COLUMN} = :city
     """)
-    fun flowWeather(city: String): Flow<List<WeatherEntity>>
+    fun flowWeather(city: String): Flow<WeatherEntity>
 
     @Query("""
         SELECT * 

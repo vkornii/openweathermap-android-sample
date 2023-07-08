@@ -20,7 +20,7 @@ object OpenWeatherModule {
     fun provideRetrofit(): Retrofit =
         Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create()) //todo use kotlin serialization
             .build()
 
     @Provides

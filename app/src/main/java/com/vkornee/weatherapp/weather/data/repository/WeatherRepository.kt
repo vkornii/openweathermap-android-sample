@@ -14,15 +14,12 @@ class WeatherRepository @Inject constructor(
     private val cache: IWeatherCache
 ): IWeatherRepository {
 
-    override suspend fun getWeatherData(city: String): List<WeatherData> =
+    override suspend fun getWeatherData(city: String): WeatherData =
         dataSource.getWeatherData(city).also { data ->
-            cache.saveWeatherData(city, data)
+            cache.saveWeatherData(data)
         }
 
-    override fun flowCityWeather(city: String): Flow<List<WeatherData>> =
-        cache.flowWeatherData(city)
-
-    override fun getWeatherDetails(city: String, weatherId: Int): Flow<WeatherData> =
-        cache.flowWeatherDetails(city, weatherId)
+    override fun flowCityWeather(city: String): Flow<WeatherData> =
+        cache.flowWeatherDetails(city)
 
 }

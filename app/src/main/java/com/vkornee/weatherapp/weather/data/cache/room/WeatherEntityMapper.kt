@@ -1,32 +1,40 @@
 package com.vkornee.weatherapp.weather.data.cache.room
 
 import com.vkornee.weatherapp.weather.data.cache.room.entities.WeatherEntity
+import com.vkornee.weatherapp.weather.domain.model.Location
 import com.vkornee.weatherapp.weather.domain.model.WeatherData
 import javax.inject.Inject
 
 class WeatherEntityMapper @Inject constructor() {
 
-    fun map(city: String, weatherDataList: List<WeatherData>) =
-        weatherDataList.map {
-            WeatherEntity(
-                id = it.id,
-                city = city,
-                temp = it.temp,
-                feelsLikeTemp = it.feelsLikeTemp,
-                weather = it.weather,
-                description = it.description
-            )
-        }
+    fun map(weatherData: WeatherData) =
+        WeatherEntity(
+            id = weatherData.location.id,
+            city = weatherData.location.city,
+            temp = weatherData.temp,
+            description = weatherData.description,
+            feelsLike = weatherData.feelsLike,
+            minTemp = weatherData.minTemp,
+            maxTemp = weatherData.maxTemp,
+            wind = weatherData.wind,
+            cloudsPercent = weatherData.location.id,
+            pressure = weatherData.location.id,
+        )
 
-    fun map(weatherEntities: List<WeatherEntity>) =
-        weatherEntities.map { map(it) }
-
-    fun map(weatherEntity: WeatherEntity) =
+    fun map(from: WeatherEntity) =
         WeatherData(
-            weatherEntity.id,
-            weatherEntity.temp,
-            weatherEntity.feelsLikeTemp,
-            weatherEntity.weather,
-            weatherEntity.description
+            location = Location(
+                id = from.id,
+                city = from.city,
+                country = null,
+            ),
+            temp = from.temp,
+            feelsLike = from.feelsLike,
+            minTemp = from.minTemp,
+            maxTemp = from.maxTemp,
+            description = from.description,
+            wind = from.wind,
+            cloudsPercent = from.cloudsPercent,
+            pressure = from.pressure,
         )
 }

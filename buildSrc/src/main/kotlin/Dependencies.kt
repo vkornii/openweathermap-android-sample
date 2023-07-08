@@ -12,6 +12,7 @@ object Versions {
     const val gradlePlugin = "8.0.2"
     const val kotlin = "1.8.21"
     const val hilt = "2.46.1"
+    const val hiltNavigationCompose = "1.0.0"
     const val safeArgs = "2.6.0"
     const val room = "2.5.2"
     const val retrofit = "2.9.0"
@@ -25,6 +26,8 @@ object Versions {
     const val appcompat = "1.6.1"
     const val material = "1.9.0"
     const val constraintLayout = "2.1.4"
+    const val accompanist = "0.30.1"
+    const val coil = "2.4.0"
 
     /* test */
     const val junit = "4.13.2"
@@ -63,6 +66,8 @@ object Libs {
     object Compose {
         const val composeBom = "androidx.compose:compose-bom:${Versions.composeBom}"
         const val foundation = "androidx.compose.foundation:foundation"
+        const val material3 = "androidx.compose.material3:material3"
+        const val navigation = "androidx.navigation:navigation-compose"
         const val uiToolingPreview = "androidx.compose.ui:ui-tooling-preview"
         const val uiTooling = "androidx.compose.ui:ui-tooling"
         const val activity = "androidx.activity:activity-compose:${Versions.activityCompose}"
@@ -95,12 +100,18 @@ object Libs {
 
     object Hilt {
         const val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
-        const val hiltCompiler = "com.google.dagger:hilt-compiler:${Versions.hilt}"
+        const val compiler = "com.google.dagger:hilt-compiler:${Versions.hilt}"
+        const val navigationCompose = "androidx.hilt:hilt-navigation-compose:${Versions.hiltNavigationCompose}"
     }
 
     object Navigation {
         const val navigationFragmentKtx = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
         const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
+    }
+
+    object Utils {
+        const val accompanist = "com.google.accompanist:accompanist-systemuicontroller:${Versions.accompanist}"
+        const val coil = "io.coil-kt:coil-compose:${Versions.coil}"
     }
 
 }

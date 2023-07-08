@@ -6,14 +6,8 @@ import javax.inject.Qualifier
 
 interface IWeatherRepository {
 
-    suspend fun getWeatherData(city: String): List<WeatherData>
+    suspend fun getWeatherData(city: String): WeatherData
 
-    fun flowCityWeather(city: String): Flow<List<WeatherData>>
+    fun flowCityWeather(city: String): Flow<WeatherData>
 
-    fun getWeatherDetails(city: String, weatherId: Int): Flow<WeatherData>
 }
-
-@Qualifier
-@MustBeDocumented
-@Retention(AnnotationRetention.RUNTIME)
-annotation class Repository

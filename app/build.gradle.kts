@@ -56,14 +56,17 @@ dependencies {
     implementation(Libs.Kotlin.kotlinCoroutinesCore)
     implementation(Libs.Kotlin.kotlinCoroutinesAndroid)
 
-    kapt(Libs.Hilt.hiltCompiler)
+    kapt(Libs.Hilt.compiler)
     implementation(Libs.Hilt.hilt)
+    implementation(Libs.Hilt.navigationCompose)
 
     implementation(platform(Libs.Compose.composeBom))
     implementation(Libs.Compose.activity)
     implementation(Libs.Compose.foundation)
+    implementation(Libs.Compose.material3)
     implementation(Libs.Compose.lifecycleViewModel)
     implementation(Libs.Compose.uiToolingPreview)
+    implementation(Libs.Compose.navigation)
     debugImplementation(Libs.Compose.uiTooling)
 
     kapt(Libs.Room.compiler)
@@ -80,6 +83,9 @@ dependencies {
     implementation(Libs.Android.appcompat)
     implementation(Libs.Android.constraintLayout)
     implementation(Libs.Android.material)
+
+    implementation(Libs.Utils.accompanist)
+    implementation(Libs.Utils.coil)
 
     testImplementation(TestLibs.junit)
     androidTestImplementation(TestLibs.testExt)
