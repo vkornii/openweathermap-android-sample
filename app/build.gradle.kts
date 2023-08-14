@@ -33,6 +33,7 @@ android {
         }
     }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility(JavaVersion.VERSION_17)
         targetCompatibility (JavaVersion.VERSION_17)
     }
@@ -51,10 +52,13 @@ kapt {
 }
 
 dependencies {
+    coreLibraryDesugaring(Libs.Android.desugaringLibs)
 
     implementation(Libs.Kotlin.kotlinStdlib)
     implementation(Libs.Kotlin.kotlinCoroutinesCore)
     implementation(Libs.Kotlin.kotlinCoroutinesAndroid)
+    implementation(Libs.Kotlin.immutableCollections)
+    implementation(Libs.Kotlin.dateTime)
 
     kapt(Libs.Hilt.compiler)
     implementation(Libs.Hilt.hilt)
@@ -67,6 +71,7 @@ dependencies {
     implementation(Libs.Compose.lifecycleViewModel)
     implementation(Libs.Compose.uiToolingPreview)
     implementation(Libs.Compose.navigation)
+    implementation(Libs.Preferences.datastore)
     debugImplementation(Libs.Compose.uiTooling)
 
     kapt(Libs.Room.compiler)
@@ -74,6 +79,7 @@ dependencies {
     implementation(Libs.Room.runtime)
 
     implementation(Libs.Retrofit.retrofit)
+    implementation(Libs.OkHttp.loggingInterceptor)
     implementation(Libs.Retrofit.converterGson)
 
     implementation(Libs.Navigation.navigationUiKtx)

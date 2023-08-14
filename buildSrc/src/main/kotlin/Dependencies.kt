@@ -16,18 +16,23 @@ object Versions {
     const val safeArgs = "2.6.0"
     const val room = "2.5.2"
     const val retrofit = "2.9.0"
+    const val okHttpLoggingInterceptor = "4.11.0"
     const val coroutines = "1.6.4"
     const val navigation = "2.6.0"
     const val composeBom = "2023.05.01"
     const val composeTooling = "1.4.3"
     const val composeViewModel = "2.6.1"
     const val activityCompose = "1.7.2"
+    const val dataStore = "1.0.0"
     const val coreKtx = "1.10.1"
     const val appcompat = "1.6.1"
     const val material = "1.9.0"
     const val constraintLayout = "2.1.4"
     const val accompanist = "0.30.1"
     const val coil = "2.4.0"
+    const val kotlinImmutableCollections = "0.3.5"
+    const val kotlinDateTime = "0.4.0"
+    const val libdesugaring = "2.0.3"
 
     /* test */
     const val junit = "4.13.2"
@@ -74,6 +79,10 @@ object Libs {
         const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.composeViewModel}"
     }
 
+    object Preferences {
+        const val datastore = "androidx.datastore:datastore-preferences:${Versions.dataStore}"
+    }
+
     object Room {
         const val runtime = "androidx.room:room-runtime:${Versions.room}"
         const val ktx = "androidx.room:room-ktx:${Versions.room}"
@@ -84,6 +93,8 @@ object Libs {
         const val kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
         const val kotlinCoroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
         const val kotlinCoroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+        const val immutableCollections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:${Versions.kotlinImmutableCollections}"
+        const val dateTime = "org.jetbrains.kotlinx:kotlinx-datetime:${Versions.kotlinDateTime}"
     }
 
     object Retrofit {
@@ -91,11 +102,16 @@ object Libs {
         const val converterGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
     }
 
+    object OkHttp {
+        const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttpLoggingInterceptor}"
+    }
+
     object Android {
         const val androidCoreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
         const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
         const val material = "com.google.android.material:material:${Versions.material}"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+        const val desugaringLibs = "com.android.tools:desugar_jdk_libs:${Versions.libdesugaring}"
     }
 
     object Hilt {

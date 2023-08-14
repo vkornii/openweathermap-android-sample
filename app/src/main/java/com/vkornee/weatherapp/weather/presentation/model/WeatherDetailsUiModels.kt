@@ -1,5 +1,8 @@
 package com.vkornee.weatherapp.weather.presentation.model
 
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.datetime.Instant
+
 data class WeatherDetailsUiModel(
     val header: WeatherDetailsHeader,
     val tiles: List<Tile>,
@@ -17,10 +20,21 @@ data class WeatherDetailsHeader(
     val dateTime: String
 )
 
-class Tile(
+data class Tile(
     val type: TileType,
     val value: String,
     val extras: String? = null,
+)
+
+data class WeekForecastGraphData(
+    val tempStep: Int = 10,
+    val entries: ImmutableList<WeekForecastGraphEntry>
+)
+
+data class WeekForecastGraphEntry(
+    val date: Instant,
+    val temp: Int,
+    val isNow: Boolean
 )
 
 enum class TileType {

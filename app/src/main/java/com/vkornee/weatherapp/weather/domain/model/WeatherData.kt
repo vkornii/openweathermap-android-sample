@@ -23,3 +23,5 @@ data class Wind(
     val directionDegrees: Int,
     val speed: Double
 )
+
+enum class TempUnit { Celsius, Fahrenheit }

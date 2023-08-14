@@ -20,15 +20,15 @@ sealed interface Destination {
         override val args: List<NamedNavArgument> = emptyList()
     }
 
-    object WeatherDetails : Destination {
-        override val icon = Icons.Default.Info
-        override val route = "weatherDetails"
+    object Home : Destination {
+        override val icon = Icons.Default.List
+        override val route = "home"
         override val args: List<NamedNavArgument> = emptyList()
     }
 
-    object WeatherList : Destination {
+    object WeatherDetails : Destination {
         const val CITY_ARG = "city"
-        private const val PATH = "weatherList"
+        private const val PATH = "weather"
 
         override val icon = Icons.Default.List
         override val route = "${PATH}/{$CITY_ARG}"
@@ -40,4 +40,5 @@ sealed interface Destination {
 
         fun formatRoute(city: String) = "${PATH}/$city"
     }
+
 }

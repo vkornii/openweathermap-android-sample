@@ -2,7 +2,10 @@ package com.vkornee.weatherapp.weather.presentation.di
 
 import com.vkornee.weatherapp.BuildConfig
 import com.vkornee.weatherapp.weather.data.cache.IWeatherCache
+import com.vkornee.weatherapp.weather.data.cache.datastore.DataStorePreferences
+import com.vkornee.weatherapp.weather.data.cache.datastore.IPreferences
 import com.vkornee.weatherapp.weather.data.cache.room.WeatherCache
+import com.vkornee.weatherapp.weather.data.repository.SettingsRepository
 import com.vkornee.weatherapp.weather.data.repository.WeatherRepository
 import com.vkornee.weatherapp.weather.data.source.WeatherDataSource
 import com.vkornee.weatherapp.weather.data.source.openweather.OpenWeatherDataSource
@@ -10,6 +13,7 @@ import com.vkornee.weatherapp.weather.domain.model.Cache
 import com.vkornee.weatherapp.weather.domain.model.CacheType
 import com.vkornee.weatherapp.weather.domain.model.DataSource
 import com.vkornee.weatherapp.weather.domain.model.SourceType
+import com.vkornee.weatherapp.weather.domain.repository.ISettingsRepository
 import com.vkornee.weatherapp.weather.domain.repository.IWeatherRepository
 import dagger.Binds
 import dagger.Module
@@ -26,6 +30,14 @@ interface WeatherModule {
     @Binds
     @Singleton
     fun provideRepository(repository: WeatherRepository): IWeatherRepository
+
+    @Binds
+    @Singleton
+    fun provideSettingsRepository(repository: SettingsRepository): ISettingsRepository
+
+    @Binds
+    @Singleton
+    fun providePreferences(preferences: DataStorePreferences): IPreferences
 
     @Binds
     @Singleton

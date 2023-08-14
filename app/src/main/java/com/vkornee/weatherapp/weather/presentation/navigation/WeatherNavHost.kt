@@ -2,17 +2,14 @@ package com.vkornee.weatherapp.weather.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.vkornee.weatherapp.Destination
-import com.vkornee.weatherapp.weather.presentation.view.CitySelection
-import com.vkornee.weatherapp.weather.presentation.view.WeatherDetails
-import com.vkornee.weatherapp.weather.presentation.view.WeatherList
+import com.vkornee.weatherapp.weather.presentation.view.CitySelectionScreen
+import com.vkornee.weatherapp.weather.presentation.view.HomeScreen
+import com.vkornee.weatherapp.weather.presentation.view.WeatherScreen
 
 @Composable
 fun WeatherNavHost(
@@ -21,22 +18,27 @@ fun WeatherNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Destination.CitySelection.route,
+        startDestination = Destination.Home.route,
         modifier = modifier
     ) {
+        composable(Destination.Home.route) {
+            HomeScreen(
+                onLocationNotSelected = { navController.navigate(Destination.CitySelection.route) }
+            )
+        }
         composable(Destination.CitySelection.route) {
-            CitySelection { city ->
-                navController.navigate(Destination.WeatherList.formatRoute(city))
+            CitySelectionScreen { city ->
+                with (navController) {
+                    popBackStack()
+                    navController.navigate(Destination.WeatherDetails.formatRoute(city))
+                }
             }
         }
-        composable(Destination.WeatherDetails.route) {
-            WeatherDetails()
-        }
         composable(
-            route = Destination.WeatherList.route,
-            arguments = Destination.WeatherList.args
+            route = Destination.WeatherDetails.route,
+            arguments = Destination.WeatherDetails.args
         ) {
-            WeatherList()
+            WeatherScreen()
         }
     }
 }

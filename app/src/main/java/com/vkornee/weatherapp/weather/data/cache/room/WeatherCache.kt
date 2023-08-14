@@ -20,9 +20,6 @@ class WeatherCache @Inject constructor(
     override fun flowWeatherDetails(city: String): Flow<WeatherData> =
         weatherDao.flowWeather(city)
             .filterNotNull()
-            .onEach {
-                Log.w("kornienko", "en tity $it")
-            }
             .map(weatherEntityMapper::map)
 
 }

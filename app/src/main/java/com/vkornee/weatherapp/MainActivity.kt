@@ -25,9 +25,6 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun WeatherApp() {
-        val navController = rememberNavController()
-        WeatherNavHost(
-            navController = navController
-        )
+        WeatherNavHost()
     }
 }

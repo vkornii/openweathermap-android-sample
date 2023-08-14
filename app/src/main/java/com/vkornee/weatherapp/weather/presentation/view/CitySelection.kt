@@ -1,20 +1,18 @@
 package com.vkornee.weatherapp.weather.presentation.view
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.material3.TextFieldDefaults.indicatorLine
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -25,11 +23,29 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.vkornee.weatherapp.weather.presentation.viewmodel.CitySelectionViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CitySelection(
+fun CitySelectionScreen(
+    viewModel: CitySelectionViewModel = hiltViewModel(),
     onSubmit: (String) -> Unit
+) {
+    val state = viewModel.state.collectAsState()
+
+    when (val viewState = state.value) {
+        CitySelectionViewModel.ViewState.Content -> CitySelection(viewModel)
+        CitySelectionViewModel.ViewState.Loading -> CitySelection(viewModel, true)
+        is CitySelectionViewModel.ViewState.CitySubmitted -> {
+            LaunchedEffect(key1 = viewState.city) { onSubmit(viewState.city) }
+        }
+    }
+}
+
+@Composable
+private fun CitySelection(
+    viewModel: CitySelectionViewModel,
+    isLoading: Boolean = false
 ) {
     Column(
         modifier = Modifier
@@ -42,13 +58,14 @@ fun CitySelection(
         TextField(
             value = city,
             onValueChange = { city = it },
+            enabled = isLoading.not(),
             colors = TextFieldDefaults.colors(
                 focusedTextColor = MaterialTheme.colorScheme.primaryContainer,
                 unfocusedTextColor = MaterialTheme.colorScheme.primaryContainer,
                 errorTextColor = MaterialTheme.colorScheme.onErrorContainer,
                 focusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
                 unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                disabledContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.inversePrimary,
                 errorContainerColor = MaterialTheme.colorScheme.errorContainer
             ),
             keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
@@ -59,9 +76,10 @@ fun CitySelection(
         )
 
         Button(
+            enabled = isLoading.not(),
             onClick = {
                 focusManager.clearFocus()
-                onSubmit(city)
+                viewModel.onSubmit(city)
             }
         ) {
             Text(text = "Submit")
@@ -73,5 +91,5 @@ fun CitySelection(
 @Preview
 @Composable
 fun PreviewCitySelection() {
-    CitySelection(onSubmit = {})
+    CitySelectionScreen(onSubmit = {})
 }
