@@ -1,11 +1,11 @@
 @file:Suppress("UnstableApiUsage")
 
 plugins {
-    id(Plugins.Android.name)
-    id(Plugins.Kotlin.androidName)
-    id(Plugins.Kotlin.kaptName)
-    id(Plugins.Hilt.name)
-    id(Plugins.SafeArgs.name)
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.kapt)
+    alias(libs.plugins.hilt)
 }
 
 val openWeatherMapApikey: String by project
@@ -43,7 +43,7 @@ android {
         compose = true
     }
 
-    composeOptions { kotlinCompilerExtensionVersion = "1.4.7" }
+    composeOptions { kotlinCompilerExtensionVersion = "1.5.0" }
 
 }
 
@@ -52,48 +52,31 @@ kapt {
 }
 
 dependencies {
-    coreLibraryDesugaring(Libs.Android.desugaringLibs)
+    val composeBom = platform(libs.compose.bom)
+    implementation(composeBom)
 
-    implementation(Libs.Kotlin.kotlinStdlib)
-    implementation(Libs.Kotlin.kotlinCoroutinesCore)
-    implementation(Libs.Kotlin.kotlinCoroutinesAndroid)
-    implementation(Libs.Kotlin.immutableCollections)
-    implementation(Libs.Kotlin.dateTime)
+    implementation(libs.bundles.room)
+    ksp(libs.room.compiler)
 
-    kapt(Libs.Hilt.compiler)
-    implementation(Libs.Hilt.hilt)
-    implementation(Libs.Hilt.navigationCompose)
+    implementation(libs.bundles.hilt)
+    kapt(libs.hilt.compiler)
 
-    implementation(platform(Libs.Compose.composeBom))
-    implementation(Libs.Compose.activity)
-    implementation(Libs.Compose.foundation)
-    implementation(Libs.Compose.material3)
-    implementation(Libs.Compose.lifecycleViewModel)
-    implementation(Libs.Compose.uiToolingPreview)
-    implementation(Libs.Compose.navigation)
-    implementation(Libs.Preferences.datastore)
-    debugImplementation(Libs.Compose.uiTooling)
+    implementation(libs.bundles.kotlin.coroutines)
+    implementation(libs.bundles.navigation.ext)
+    implementation(libs.bundles.compose)
+    implementation(libs.bundles.compose.ext)
 
-    kapt(Libs.Room.compiler)
-    implementation(Libs.Room.ktx)
-    implementation(Libs.Room.runtime)
+    implementation(libs.kotlin.stdlib)
+    implementation(libs.datetime)
+    implementation(libs.immutable.collections)
+    implementation(libs.datastore)
+    implementation(libs.retrofit)
+    implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.android.core.ktx)
+    implementation(libs.accompanist)
+    implementation(libs.coil)
+    coreLibraryDesugaring(libs.desugaring.libs)
 
-    implementation(Libs.Retrofit.retrofit)
-    implementation(Libs.OkHttp.loggingInterceptor)
-    implementation(Libs.Retrofit.converterGson)
-
-    implementation(Libs.Navigation.navigationUiKtx)
-    implementation(Libs.Navigation.navigationFragmentKtx)
-
-    implementation(Libs.Android.androidCoreKtx)
-    implementation(Libs.Android.appcompat)
-    implementation(Libs.Android.constraintLayout)
-    implementation(Libs.Android.material)
-
-    implementation(Libs.Utils.accompanist)
-    implementation(Libs.Utils.coil)
-
-    testImplementation(TestLibs.junit)
-    androidTestImplementation(TestLibs.testExt)
-    androidTestImplementation(TestLibs.espressoCore)
+    testImplementation(libs.junit)
 }

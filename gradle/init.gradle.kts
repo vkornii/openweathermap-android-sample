@@ -1,0 +1,6 @@
+initscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
