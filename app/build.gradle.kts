@@ -13,11 +13,11 @@ val openWeatherMapUnits: String by project
 
 android {
     namespace = Apps.namespace
-    compileSdk = Apps.compileSdk
+    compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
         applicationId = Apps.applicationId
-        minSdk = Apps.minSdk
-        targetSdk = Apps.targetSdk
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = Apps.versionCode
         versionName = Apps.versionName
 

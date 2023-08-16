@@ -14,6 +14,8 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsControllerCompat
 
 
 private val LightColors = lightColorScheme(
@@ -98,13 +100,16 @@ fun AppTheme(
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
-            (view.context as Activity).window.statusBarColor = colors.primary.toArgb()
-            ViewCompat.getWindowInsetsController(view)?.isAppearanceLightStatusBars = useDarkTheme
+            (view.context as Activity).window?.apply {
+                statusBarColor = colors.primary.toArgb()
+                WindowCompat.getInsetsController(this, view).isAppearanceLightStatusBars = useDarkTheme
+            }
         }
     }
 
     MaterialTheme(
         colorScheme = colors,
+        typography = typography,
         content = content
     )
 

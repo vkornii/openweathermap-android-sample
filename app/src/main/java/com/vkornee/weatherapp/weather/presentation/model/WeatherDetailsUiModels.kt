@@ -7,8 +7,11 @@ data class WeatherDetailsUiModel(
     val header: WeatherDetailsHeader,
     val tiles: List<Tile>,
     val hourlyForecast: List<Pair<String, String>>,
-    val dayForecast: List<Pair<String, String>>
+    val dayForecast: List<Pair<String, String>>,
+    val selectedPeriod: WeatherPeriod = WeatherPeriod.Today
 )
+
+enum class WeatherPeriod { Today, Tomorrow, Days10 }
 
 data class WeatherDetailsHeader(
     val location: String,

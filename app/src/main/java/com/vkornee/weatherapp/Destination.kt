@@ -14,19 +14,19 @@ sealed interface Destination {
     val route: String
     val args: List<NamedNavArgument>
 
-    object CitySelection : Destination {
+    data object CitySelection : Destination {
         override val icon = Icons.Default.Search
         override val route = "citySelection"
         override val args: List<NamedNavArgument> = emptyList()
     }
 
-    object Home : Destination {
+    data object Home : Destination {
         override val icon = Icons.Default.List
         override val route = "home"
         override val args: List<NamedNavArgument> = emptyList()
     }
 
-    object WeatherDetails : Destination {
+    data object WeatherDetails : Destination {
         const val CITY_ARG = "city"
         private const val PATH = "weather"
 
